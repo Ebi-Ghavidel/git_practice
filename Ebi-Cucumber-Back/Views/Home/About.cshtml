@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h3>About the program</h3>
+
+<p>
+    While the logic of the program was so easy (using several switch cases), I had a look and I found a fairly good program on msdn.microsoft website:<br />
+    <a href="https://code.msdn.microsoft.com/windowsdesktop/Convert-Numeric-Value-Into-db70224e" target="_blank">https://code.msdn.microsoft.com/windowsdesktop/Convert-Numeric-Value-Into-db70224e</a>
+    Microsoft suggest this code to convert a number to words. However, I found some minor bugs there. For example, to convert Cents into words, the program does as follows: <br />
+    0.36521 => Three Six Five Two One Cents<br />
+    I changed this part to produce your desired output: <br />
+    0.36521 => THIRTY---SIX CENTS<br />
+    The other major change is about using “Extension Method”. According to <a href="https://www.c-sharpcorner.com/uploadfile/puranindia/extension-methods-in-C-Sharp-3-0/" target="_blank">https://www.c-sharpcorner.com/uploadfile/puranindia/extension-methods-in-C-Sharp-3-0/</a> Extension methods enable you to add methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. C# extension method is a special kind of static method that is called as if it was an instance methods on the extended type. <br />
+    It would be better for a good developer to call function with extension method instead of calling a function in normal way. For example, <br />
+    private static String ConvertToWords(String numb)
+    <br />
+    can be changed to: <br />
+
+    public static class StringExtension<br />
+    {<br />
+    public static string ToWords(this string stringNumber)<br />
+    ...
+    <br />
+    and call it as follows: <br />
+    string output = stringNumber.ToWords();<br />
+    I also provided some validations for the input. While in the Microsoft page, the programmer uses double type, I changed it to decimal. It is because, if a user inputs: 9999999999999999<br />
+    Then it will be converted to “1E+16” by using  Convert.ToDouble().ToString() and it was another bug. <br />
+    Moreover, the name of variables in the Microsoft program was not good. According to “Clean Code” book by Uncle Bob, instead of many comments, it is better to use a clear name for a variable. For example, it is expected that the variable with the name of number, would be an integer (or decimal) variable but Microsoft developer defined it as string! I personally prefer to use a clearer name (e.g., stringNumber). <br />
+    I also used Microsoft.Unobtrusive.Ajax to avoid opening new tab to show the result (by the aid of partialView). If you want, you can simply remove loading image with 1 second delay. <br />
+    I hope you find my try good. <br />
+    Best<br />
+    Ebi
+
+
+
+
+</p>
+
+

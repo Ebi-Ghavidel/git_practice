@@ -1,0 +1,9 @@
+﻿@if (ViewBag.Message.ToString().Contains("The number in currency fomat is"))
+{
+        <span style="color:green; font-size:15px; margin-bottom: 5px;">  ✓ @Html.Raw(ViewBag.Message)</span>
+}
+else
+{
+        <span style="color:red; font-size:15px; margin-bottom: 5px;"> ✗ @Html.Raw(ViewBag.Message)</span>
+}
+

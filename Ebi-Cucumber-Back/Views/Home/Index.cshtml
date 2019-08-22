@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron" style="padding: 10px;">
+    <h2>Cucumber Backend Task</h2>
+    <p class="lead">
+        This simple web application consists of three web pages that perform the following function:
+        <ul style="font-size: 12px;">
+            <li>Capture a person’s name and a number</li>
+            <li>Covert this number into words with a currency of dollars and cents</li>
+            <li>Render this name and number (as words) as a web page</li>
+        </ul>
+    </p>
+    <p>@Html.ActionLink("Read More in About Page", "About", "Home", null,
+            new { @style = "font-size: 15px;", @class = "btn btn-primary btn-send-message" })</p>
+</div>
+@{
+    using (Ajax.BeginForm("ToWord", "Home",
+        new AjaxOptions {
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "POST",
+            LoadingElementId = "imgLoading",
+            UpdateTargetId = "result"
+        }))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Input your name and money</h2>
+                <div class="form-group">
+                    <input type="text" id="Name" name="Name" class="form-control" placeholder="Name (Required)" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" id="Money" name="Money" step="any" class="form-control" placeholder="Money (Required)" 
+                           oninvalid="this.setCustomValidity('Enter a valid amount of money (e.g., 3.09)')" oninput="this.setCustomValidity('')" required>
+                </div>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td style="padding-top:10px; text-align:center; width: 50px; height: 50px;">
+                                <img id="imgLoading" src="~/images/loading.gif" style="width:40px; display:none;" />
+                            </td>
+                            <td style="padding-top:10px;">
+                                <input type="submit" class="btn btn-primary btn-send-message" value="To Word">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <h2>The result comes here...</h2>
+                <div id="result"></div>
+            </div>
+        </div>
+    }
+}
